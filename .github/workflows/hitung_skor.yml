@@ -28,7 +28,7 @@ jobs:
     - name: Jalankan skrip Python untuk menghitung skor
       run: |
         python hitung_skor.py  # Jalankan skrip Python yang sudah dibuat
-          
+        
     - name: Upload hasil skor ke GitHub
       uses: actions/upload-artifact@v2
       with:
