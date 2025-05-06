@@ -1,0 +1,36 @@
+name: Hitung Skor Turnamen FF
+
+on:
+  push:
+    paths:
+      - 'Template_Skor_Turnamen_FF.xlsx'  # Ganti dengan nama file Excel yang digunakan
+  pull_request:
+    paths:
+      - 'Template_Skor_Turnamen_FF.xlsx'
+
+jobs:
+  run_python_script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install pandas openpyxl  # Pastikan openpyxl diinstall agar bisa membaca/menulis file Excel
+
+    - name: Jalankan skrip Python untuk menghitung skor
+      run: |
+        python hitung_skor.py  # Jalankan skrip Python yang sudah dibuat
+          
+    - name: Upload hasil skor ke GitHub
+      uses: actions/upload-artifact@v2
+      with:
+        name: hasil-skor-turnamen
+        path: Hasil_Skor_Turnamen_FF.xlsx  # Path file output
